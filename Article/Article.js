@@ -115,19 +115,27 @@ const data = [
 
 function articleCreator(props) {
   const articleDiv = document.createElement("div");
+  articleDiv.classList.add("article");
 
   const h2 = document.createElement("h2");
+  h2.textContent = props.title;
 
   const dateParagraph = document.createElement("p");
   dateParagraph.classList.add("date");
+  dateParagraph.textContent = props.date;
 
   const paragraph1 = document.createElement("p");
+  paragraph1.textContent = props.firstParagraph;
+
   const paragraph2 = document.createElement("p");
+  paragraph2.textContent = props.secondParagraph;
+
   const paragraph3 = document.createElement("p");
+  paragraph3.textContent = props.thirdParagraph;
 
   const expandButtonSpan = document.createElement("span");
   expandButtonSpan.classList.add("expandButton");
-  expandButtonSpan.addEventListener("click", e => {
+  expandButtonSpan.addEventListener("click", () => {
     articleDiv.classList.toggle("article-open");
   });
 
@@ -140,3 +148,15 @@ function articleCreator(props) {
 
   return articleDiv;
 }
+
+let newArticleDivs = data.map(props => {
+  let newArticleDiv = articleCreator(props);
+
+  return newArticleDiv;
+});
+
+const articlesDiv = document.querySelector(".articles");
+
+newArticleDivs.forEach(div => {
+  articlesDiv.appendChild(div);
+});
